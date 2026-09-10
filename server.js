@@ -10,6 +10,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const __dirname=path.dirname(fileURLToPath(import.meta.url));
 const app=express(), PORT=process.env.PORT||3000;
+app.set('trust proxy',1);
 app.disable('etag');
 app.use('/api',(q,s,n)=>{s.set('Cache-Control','no-store, no-cache, must-revalidate, proxy-revalidate');s.set('Pragma','no-cache');s.set('Expires','0');n()});
 fs.mkdirSync(path.join(__dirname,'data'),{recursive:true});fs.mkdirSync(path.join(__dirname,'public','generated'),{recursive:true});
